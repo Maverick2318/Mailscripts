@@ -60,7 +60,6 @@ def pop_fetch():
 
 
 def mail_body(msg):
-    #print (msg)
 # Retrive mail body...
     text=""
     if msg.is_multipart():
@@ -79,9 +78,6 @@ def mail_body(msg):
         else:
              return (html.strip())
     else:
-        #text = str(msg.get_payload(decode=True), msg.get_content_charset(), 'ignore').encode('utf8', 'replace')
-        #print (msg.get_payload)
-        #print (str(msg.get_payload(decode=True)))
         text = msg.get_payload(decode=True).decode("utf-8")
         return (text.strip())
 
@@ -100,10 +96,9 @@ def process_mailbox(M):
             return
 
         msg = email.message_from_bytes(data[0][1])
-        print (list(msg))
         hdr = email.header.make_header(email.header.decode_header(msg['Subject']))
         subject = str(hdr)
-        #print('Received To And Date:', msg['X-Apparently-To:'])
+        print('Received To And Date:', msg['X-Apparently-To'])
         print('Subject %s: %s' % (num.decode("utf-8"), subject))
         print('Body:', mail_body(msg))
 
